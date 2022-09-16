@@ -10,6 +10,8 @@ type CircleOfHumanoidsProps = {
   characters: Character[];
   fill?: COLORS;
   stroke?: COLORS;
+  /** Percents. */
+  rotationPadding?: number;
 };
 
 export default function CircleOfHumanoids({
@@ -19,14 +21,28 @@ export default function CircleOfHumanoids({
   characters,
   fill,
   stroke,
+  rotationPadding = 0,
 }: CircleOfHumanoidsProps) {
   const humanoidRotation = 360 / characters.length;
+  const _rotationPadding = (humanoidRotation * rotationPadding) / 100;
   return (
     <>
       {characters.map((character, index) => (
         <Humanoid
-          x={x + r * Math.sin((index * humanoidRotation * Math.PI) / 180)}
-          y={y + r * Math.cos((index * humanoidRotation * Math.PI) / 180)}
+          x={
+            x +
+            r *
+              Math.sin(
+                ((index * humanoidRotation + _rotationPadding) * Math.PI) / 180
+              )
+          }
+          y={
+            y +
+            r *
+              Math.cos(
+                ((index * humanoidRotation + _rotationPadding) * Math.PI) / 180
+              )
+          }
           character={character}
           fill={fill}
           stroke={stroke}
