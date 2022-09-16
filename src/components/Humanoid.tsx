@@ -11,7 +11,7 @@ type HumanoidProps = {
 export default function Humanoid({
   x,
   y,
-  size = 20,
+  size = 10,
   character,
 }: HumanoidProps) {
   const top = [x, y - size];
@@ -26,7 +26,7 @@ export default function Humanoid({
           .join(" ")}
       />
       {character && (
-        <text x={x} y={y - 30} textAnchor="middle" fontSize="5">
+        <text x={x} y={y - 12} textAnchor="middle" fontSize="3">
           {character.name}
         </text>
       )}
