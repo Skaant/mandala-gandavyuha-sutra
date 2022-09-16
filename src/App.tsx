@@ -6,6 +6,8 @@ import Character from "./types/Character";
 import CircleOfHumanoids from "./components/CircleOfHumanoids";
 import Circle from "./components/Circle";
 import PLACES from "./data/places";
+import CHARACTERS from "./data/characters";
+import { COLORS } from "./enums/colors";
 
 function App() {
   const buddha: Character = { name: "Le Seigneur Bouddha" };
@@ -20,12 +22,24 @@ function App() {
         ].map((place) => (
           <Circle x={250} y={250} place={place} />
         ))}
-        <Humanoid x={250} y={250} character={buddha} />
+        <Humanoid x={250} y={250} character={buddha} fill={COLORS.GOLD} />
         <CircleOfHumanoids
           x={250}
           y={250}
-          r={30}
-          characters={[{ name: "a" }, { name: "b" }, { name: "c" }]}
+          r={60}
+          characters={Object.values(CHARACTERS).filter(
+            (_, index) => !(index % 2)
+          )}
+          fill={COLORS.JEWEL}
+          rotationPadding={25}
+        />
+        <CircleOfHumanoids
+          x={250}
+          y={250}
+          r={110}
+          characters={Object.values(CHARACTERS).filter((_, index) => index % 2)}
+          fill={COLORS.JEWEL}
+          rotationPadding={75}
         />
       </svg>
     </div>
