@@ -1,4 +1,5 @@
 import React from "react";
+import { COLORS } from "../enums/colors";
 import Character from "../types/Character";
 
 type HumanoidProps = {
@@ -6,6 +7,8 @@ type HumanoidProps = {
   y: number;
   size?: number;
   character?: Character;
+  fill?: COLORS;
+  stroke?: COLORS;
 };
 
 export default function Humanoid({
@@ -13,6 +16,8 @@ export default function Humanoid({
   y,
   size = 10,
   character,
+  fill,
+  stroke,
 }: HumanoidProps) {
   const top = [x, y - size];
   const right = [x + size * 0.6, y];
@@ -24,6 +29,10 @@ export default function Humanoid({
         points={[top, right, bottom, left]
           .map(([x, y]) => `${x},${y}`)
           .join(" ")}
+        {...{
+          ...(fill ? { fill } : {}),
+          ...(stroke ? { stroke, strokeWidth: 2 } : {}),
+        }}
       />
       {character && (
         <text x={x} y={y - 12} textAnchor="middle" fontSize="3">
